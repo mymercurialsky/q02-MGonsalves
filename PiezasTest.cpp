@@ -49,7 +49,7 @@ TEST(PiezasTest, dropPieceInvalidTooHighColumn){
   ASSERT_TRUE(p.dropPiece(BOARD_COLS) == Invalid);
 }
 
-Test(PiezasTest, dropPieceColumnFull){
+TEST(PiezasTest, dropPieceColumnFull){
   Piezas p;
   p.dropPiece(0);
   p.dropPiece(0);
@@ -64,17 +64,17 @@ TEST(PiezasTest, dropPieceValid){
 
 TEST(PiezasTest, dropPieceValidToggleTurn){
   Piezas p;
-  p.dropPiece(0)
+  p.dropPiece(0);
   ASSERT_TRUE(p.dropPiece(0) == O);
 }
 
 TEST(PiezasTest, dropPieceInValidToggleTurn){
   Piezas p;
-  p.dropPiece(10)
+  p.dropPiece(10);
   ASSERT_TRUE(p.dropPiece(0) == O);
 }
 
-Test(PiezasTest, dropPieceColumnFullToggleTurn){
+TEST(PiezasTest, dropPieceColumnFullToggleTurn){
   Piezas p;
   p.dropPiece(0);
   p.dropPiece(0);
@@ -83,63 +83,63 @@ Test(PiezasTest, dropPieceColumnFullToggleTurn){
   ASSERT_TRUE(p.dropPiece(1) == X);
 }
 
-Test(PiezasTest, pieceAtBlank){
+TEST(PiezasTest, pieceAtBlank){
   Piezas p;
   ASSERT_TRUE(p.pieceAt(0,0) == Blank);
 }
 
-Test(PiezasTest, pieceAtX){
+TEST(PiezasTest, pieceAtX){
   Piezas p;
   p.dropPiece(0);
   ASSERT_TRUE(p.pieceAt(0,0) == X);
 }
 
-Test(PiezasTest, pieceAtInvalidRowTooHigh){
+TEST(PiezasTest, pieceAtInvalidRowTooHigh){
   Piezas p;
   ASSERT_TRUE(p.pieceAt(BOARD_ROWS,0) == Invalid);
 }
 
-Test(PiezasTest, pieceAtInvalidColTooHigh){
+TEST(PiezasTest, pieceAtInvalidColTooHigh){
   Piezas p;
   ASSERT_TRUE(p.pieceAt(0,BOARD_COLS) == Invalid);
 }
 
-Test(PiezasTest, pieceAtInvalidRowNegative{
+TEST(PiezasTest, pieceAtInvalidRowNegative){
   Piezas p;
   ASSERT_TRUE(p.pieceAt(-1,0) == Invalid);
 }
 
-Test(PiezasTest, pieceAtInvalidColNegative){
+TEST(PiezasTest, pieceAtInvalidColNegative){
   Piezas p;
   ASSERT_TRUE(p.pieceAt(0,-1) == Invalid);
 }
 
-Test(PiezasTest, pieceAtInvalidBothNegative){
+TEST(PiezasTest, pieceAtInvalidBothNegative){
   Piezas p;
   ASSERT_TRUE(p.pieceAt(-1, -1) == Invalid);
 }
 
-Test(PiezasTest, pieceAtInvalidBothTooHigh){
+TEST(PiezasTest, pieceAtInvalidBothTooHigh){
   Piezas p;
   ASSERT_TRUE(p.pieceAt(BOARD_ROWS,BOARD_COLS) == Invalid);
 }
 
-Test(PiezasTest, pieceAtInvalidRowTooHighColNegative){
+TEST(PiezasTest, pieceAtInvalidRowTooHighColNegative){
   Piezas p;
   ASSERT_TRUE(p.pieceAt(BOARD_ROWS, -1) == Invalid);
 }
 
-Test(PiezasTest, pieceAtInvalidRowNegativeColTooHigh){
+TEST(PiezasTest, pieceAtInvalidRowNegativeColTooHigh){
   Piezas p;
   ASSERT_TRUE(p.pieceAt(-1,BOARD_COLS) == Invalid);
 }
 
-Test(PiezasTest, gameStateBoardNotFull){
+TEST(PiezasTest, gameStateBoardNotFull){
   Piezas p;
   ASSERT_TRUE(p.gameState() == Invalid);
 }
 
-Test(PiezasTest, gameStateBoardFullTie){
+TEST(PiezasTest, gameStateBoardFullTie){
   Piezas p;
   p.dropPiece(0);
   p.dropPiece(1);
@@ -156,7 +156,7 @@ Test(PiezasTest, gameStateBoardFullTie){
   ASSERT_TRUE(p.gameState() == Blank);
 }
 
-Test(PiezasTest, gameStateBoardFullXWinsVerticallyLeftThree){
+TEST(PiezasTest, gameStateBoardFullXWinsVerticallyLeftThree){
   Piezas p;
   p.dropPiece(0);
   p.dropPiece(1);

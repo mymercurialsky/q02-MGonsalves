@@ -31,7 +31,17 @@ Piezas::Piezas(){
  * is never called).
 **/
 void Piezas::reset(){
-  board(BOARD_ROWS, vector<Piece>(BOARD_COLS, Blank));
+
+  std::vector<Piece> v;
+  v.push_back(Blank);
+  v.push_back(Blank);
+  v.push_back(Blank);
+  v.push_back(Blank);
+		
+  for (int i = 0; i < BOARD_ROWS; i++){
+	board.push_back(v);
+  }
+
 }
 
 /**
@@ -68,7 +78,7 @@ Piece Piezas::dropPiece(int column){
 **/
 Piece Piezas::pieceAt(int row, int column){
 
-  if (row < 0 || row >= BOARD_ROWS || col < 0 || col >= BOARD_COLS) return Invalid;
+  if (row < 0 || row >= BOARD_ROWS || column < 0 || column >= BOARD_COLS) return Invalid;
   return board[row][column];
 
 }
@@ -87,7 +97,7 @@ Piece Piezas::gameState(){
   int XMax = 0;
   int OMax = 0;
   Piece last = Blank;
-  count = -1;
+  int count = 0;
 
   // Search for streaks horizontally
   for (int i = 0; i < BOARD_ROWS; i++){
@@ -98,10 +108,10 @@ Piece Piezas::gameState(){
          last = board[i][j];
        }
      	 if (board[i][j] != last || j + 1 == BOARD_COLS) {
-     		 if (last == X) xMax = count > XMax ? count : XMax;
+     		 if (last == X) XMax = count > XMax ? count : XMax;
      		 else OMax = count > OMax ? count : OMax;
      		 count = 0;
-     		 last == Blank;
+     		 last = Blank;
      	 }
      }
   }
@@ -114,10 +124,10 @@ Piece Piezas::gameState(){
          last = board[i][j];
        }
        if (board[i][j] != last || j + 1 == BOARD_ROWS) {
-         if (last == X) xMax = count > XMax ? count : XMax;
+         if (last == X) XMax = count > XMax ? count : XMax;
          else OMax = count > OMax ? count : OMax;
          count = 0;
-         last == Blank;
+         last = Blank;
        }
      }
   }
@@ -126,7 +136,7 @@ Piece Piezas::gameState(){
   if (OMax == XMax) return Blank;
 
   // Otherwise return piece with largest streak value
-  Piece returnValue = OMax > XMax ? OMax : XMax;
+  Piece returnValue = OMax > XMax ? O : X;
   return returnValue;
 
 }
