@@ -31,9 +31,7 @@ Piezas::Piezas(){
  * is never called).
  **/
 void Piezas::reset(){
-
 	board.assign(BOARD_ROWS, std::vector<Piece>(BOARD_COLS, Blank));
-
 }
 
 /**
@@ -45,7 +43,6 @@ void Piezas::reset(){
  * Trying to drop a piece where it cannot be placed loses the player's turn
  **/
 Piece Piezas::dropPiece(int column){
-
 	Piece returnValue = turn;
 
 	if (column < 0 || column >= BOARD_COLS) returnValue = Invalid;
@@ -69,10 +66,8 @@ Piece Piezas::dropPiece(int column){
  * are no pieces there, or Invalid if the coordinates are out of bounds
  **/
 Piece Piezas::pieceAt(int row, int column){
-
 	if (row < 0 || row >= BOARD_ROWS || column < 0 || column >= BOARD_COLS) return Invalid;
 	return board[row][column];
-
 }
 
 /**
@@ -85,7 +80,6 @@ Piece Piezas::pieceAt(int row, int column){
  * line, it is a tie.
  **/
 Piece Piezas::gameState(){
-
 	int XMax = 0;
 	int OMax = 0;
 	Piece last = Blank;
@@ -140,5 +134,4 @@ Piece Piezas::gameState(){
 
 	// Otherwise return piece with largest streak value
 	return OMax > XMax ? O : X;
-
 }

@@ -64,7 +64,7 @@ TEST(PiezasTest, dropPieceInvalidTooHighColumn){
 	ASSERT_TRUE(p.dropPiece(BOARD_COLS) == Invalid);
 }
 
-TEST(PiezasTest, dropPieceColumnFull){
+TEST(PiezasTest, dropPieceColumnFullZero){
 	Piezas p;
 	p.dropPiece(0);
 	p.dropPiece(0);
@@ -72,7 +72,30 @@ TEST(PiezasTest, dropPieceColumnFull){
 	ASSERT_TRUE(p.dropPiece(0) == Blank);
 }
 
-TEST(PiezasTest, dropPieceValid){
+TEST(PiezasTest, dropPieceColumnFullOne){
+	Piezas p;
+	p.dropPiece(1);
+	p.dropPiece(1);
+	p.dropPiece(1);
+	ASSERT_TRUE(p.dropPiece(1) == Blank);
+}
+
+TEST(PiezasTest, dropPieceColumnFullTwo){
+	Piezas p;
+	p.dropPiece(2);
+	p.dropPiece(2);
+	p.dropPiece(2);
+	ASSERT_TRUE(p.dropPiece(2) == Blank);
+}
+TEST(PiezasTest, dropPieceColumnFullThree){
+	Piezas p;
+	p.dropPiece(3);
+	p.dropPiece(3);
+	p.dropPiece(3);
+	ASSERT_TRUE(p.dropPiece(3) == Blank);
+}
+
+TEST(PiezasTest, dropPieceValidReturnX){
 	Piezas p;
 	ASSERT_TRUE(p.dropPiece(0) == X);
 }
@@ -149,7 +172,7 @@ TEST(PiezasTest, pieceAtInvalidRowNegativeColTooHigh){
 	ASSERT_TRUE(p.pieceAt(-1,BOARD_COLS) == Invalid);
 }
 
-TEST(PiezasTest, gameStateBoardNotFull){
+TEST(PiezasTest, gameStateBoardEmptyInvalid){
 	Piezas p;
 	ASSERT_TRUE(p.gameState() == Invalid);
 }
@@ -163,7 +186,7 @@ TEST(PiezasTest, severalPiecesDroppedNotFull){
 	ASSERT_TRUE(p.gameState() == Invalid);
 }
 
-TEST(PiezasTest, gameStateBoardFullTie){
+TEST(PiezasTest, gameStateBoardFullTieAllOneMax){
 	Piezas p;
 	p.dropPiece(0);
 	p.dropPiece(1);
@@ -231,19 +254,178 @@ TEST(PiezasTest, gameStateBoardFullOWinsHorizontalTopFour){
 	ASSERT_TRUE(p.gameState() == O);
 }
 
-TEST(PiezasTest, gameStateBoardFullTieOMaxVertical){
+TEST(PiezasTest,gameStateBoardFullAllOs){
+ 	Piezas p;
+	p.dropPiece(-1);
+	p.dropPiece(0);
+	p.dropPiece(-1);
+	p.dropPiece(1);
+	p.dropPiece(-1);
+	p.dropPiece(2);
+	p.dropPiece(-1);
+	p.dropPiece(3);
+	p.dropPiece(-1);
+	p.dropPiece(0);
+	p.dropPiece(-1);
+	p.dropPiece(1);
+	p.dropPiece(-1);
+	p.dropPiece(2);
+	p.dropPiece(-1);
+	p.dropPiece(3);
+	p.dropPiece(-1);
+	p.dropPiece(0);
+	p.dropPiece(-1);
+	p.dropPiece(1);
+	p.dropPiece(-1);
+	p.dropPiece(2);
+	p.dropPiece(-1);
+	p.dropPiece(3);
+	ASSERT_TRUE(p.gameState() == O);
+}
+
+TEST(PiezasTest,gameStateBoardFullAllXs){
+ 	Piezas p;
+	p.dropPiece(0);
+	p.dropPiece(-1);
+	p.dropPiece(1);
+	p.dropPiece(-1);
+	p.dropPiece(2);
+	p.dropPiece(-1);
+	p.dropPiece(3);
+	p.dropPiece(-1);
+	p.dropPiece(0);
+	p.dropPiece(-1);
+	p.dropPiece(1);
+	p.dropPiece(-1);
+	p.dropPiece(2);
+	p.dropPiece(-1);
+	p.dropPiece(3);
+	p.dropPiece(-1);
+	p.dropPiece(0);
+	p.dropPiece(-1);
+	p.dropPiece(1);
+	p.dropPiece(-1);
+	p.dropPiece(2);
+	p.dropPiece(-1);
+	p.dropPiece(3);
+	ASSERT_TRUE(p.gameState() == X);
+}
+
+TEST(PiezasTest, gameStateBoardFullBothFourAcrossTie){
+	Piezas p;
+	p.dropPiece(0);
+	p.dropPiece(0);
+	p.dropPiece(1);
+	p.dropPiece(1);
+	p.dropPiece(2);
+	p.dropPiece(2);
+	p.dropPiece(3);
+	p.dropPiece(3);
+	p.dropPiece(0);
+	p.dropPiece(1);
+	p.dropPiece(2);
+	p.dropPiece(3);
+	ASSERT_TRUE(p.gameState() == Blank);
+}
+
+TEST(PiezasTest, gameStateBoardFullBothThreeAcrossTie){
+	Piezas p;
+	p.dropPiece(0);
+	p.dropPiece(1);
+	p.dropPiece(0);
+	p.dropPiece(2);
+	p.dropPiece(0);
+	p.dropPiece(3);
+	p.dropPiece(2);
+	p.dropPiece(1);
+	p.dropPiece(1);
+	p.dropPiece(3);
+	p.dropPiece(2);
+	p.dropPiece(3);
+	ASSERT_TRUE(p.gameState() == Blank);
+}
+
+TEST(PiezasTest, gameStateBoardFullAllMaxVerticalTie){
+	Piezas p;
+	p.dropPiece(0);
+	p.dropPiece(2);
+	p.dropPiece(1);
+	p.dropPiece(3);
+	p.dropPiece(0);
+	p.dropPiece(2);
+	p.dropPiece(1);
+	p.dropPiece(3);
+	p.dropPiece(0);
+	p.dropPiece(2);
+	p.dropPiece(1);
+	p.dropPiece(3);
+	ASSERT_TRUE(p.gameState() == Blank);
+}
+
+TEST(PiezasTest, gameStateBoardFullBothMaxTwoTie){
+	Piezas p;
+	p.dropPiece(0);
+	p.dropPiece(2);
+	p.dropPiece(1);
+	p.dropPiece(3);
+	p.dropPiece(1);
+	p.dropPiece(0);
+	p.dropPiece(2);
+	p.dropPiece(3);
+	p.dropPiece(0);
+	p.dropPiece(1);
+	p.dropPiece(3);
+	p.dropPiece(2);
+	ASSERT_TRUE(p.gameState() == Blank);
+}
+
+TEST(PiezasTest, gameStateBoardFullOWinsThreeVertical){
 	Piezas p;
 	p.dropPiece(0);
 	p.dropPiece(1);
 	p.dropPiece(2);
 	p.dropPiece(1);
+	p.dropPiece(0);
+	p.dropPiece(2);
+	p.dropPiece(3);
+	p.dropPiece(0);
 	p.dropPiece(3);
 	p.dropPiece(1);
-	p.dropPiece(0);
-	p.dropPiece(0);
 	p.dropPiece(2);
 	p.dropPiece(3);
+	ASSERT_TRUE(p.gameState() == O);
+}
+
+TEST(PiezasTest, gameStateBoardFullXWinsThreeHorizontal){
+	Piezas p;
+	p.dropPiece(0);
+	p.dropPiece(0);
+	p.dropPiece(1);
+	p.dropPiece(3);
+	p.dropPiece(2);
+	p.dropPiece(0);
+	p.dropPiece(1);
 	p.dropPiece(2);
 	p.dropPiece(3);
-	ASSERT_TRUE(p.gameState() == Blank);
+	p.dropPiece(1);
+	p.dropPiece(2);
+	p.dropPiece(3);
+	ASSERT_TRUE(p.gameState() == X);
+}
+
+TEST(PiezasTest, gameStateBoardFullOWinsThreeHorizontal){
+	Piezas p;
+	p.dropPiece(0);
+	p.dropPiece(1);
+	p.dropPiece(0);
+	p.dropPiece(2);
+	p.dropPiece(1);
+	p.dropPiece(3);
+	p.dropPiece(3);
+	p.dropPiece(0);
+	p.dropPiece(1);
+	p.dropPiece(2);
+	p.dropPiece(2);
+	p.dropPiece(3);
+	ASSERT_TRUE(p.gameState() == O);
 }
