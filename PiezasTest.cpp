@@ -133,3 +133,42 @@ Test(PiezasTest, pieceAtInvalidRowNegativeColTooHigh){
   Piezas p;
   ASSERT_TRUE(p.pieceAt(-1,BOARD_COLS) == Invalid);
 }
+
+Test(PiezasTest, gameStateBoardNotFull){
+  Piezas p;
+  ASSERT_TRUE(p.gameState() == Invalid);
+}
+
+Test(PiezasTest, gameStateBoardFullTie){
+  Piezas p;
+  p.dropPiece(0);
+  p.dropPiece(1);
+  p.dropPiece(2);
+  p.dropPiece(3);
+  p.dropPiece(3);
+  p.dropPiece(2);
+  p.dropPiece(1);
+  p.dropPiece(0);
+  p.dropPiece(0);
+  p.dropPiece(1);
+  p.dropPiece(2);
+  p.dropPiece(3);
+  ASSERT_TRUE(p.gameState() == Blank);
+}
+
+Test(PiezasTest, gameStateBoardFullXWinsVerticallyLeftThree){
+  Piezas p;
+  p.dropPiece(0);
+  p.dropPiece(1);
+  p.dropPiece(0);
+  p.dropPiece(3);
+  p.dropPiece(0);
+  p.dropPiece(1);
+  p.dropPiece(2);
+  p.dropPiece(2);
+  p.dropPiece(1);
+  p.dropPiece(2);
+  p.dropPiece(3);
+  p.dropPiece(3);
+  ASSERT_TRUE(p.gameState() == X);
+}

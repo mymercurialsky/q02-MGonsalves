@@ -70,7 +70,7 @@ Piece Piezas::pieceAt(int row, int column){
 
   if (row < 0 || row >= BOARD_ROWS || col < 0 || col >= BOARD_COLS) return Invalid;
   return board[row][column];
-  
+
 }
 
 /**
@@ -82,4 +82,51 @@ Piece Piezas::pieceAt(int row, int column){
  * or horizontally. If both X's and O's have the same max number of pieces in a
  * line, it is a tie.
 **/
-Piece Piezas::gameState();
+Piece Piezas::gameState(){
+
+  int XMax = 0;
+  int OMax = 0;
+  Piece last = Blank;
+  count = -1;
+
+  // Search for streaks horizontally
+  for (int i = 0; i < BOARD_ROWS; i++){
+      for (int j = 0; j < BOARD_COLS; j++){
+     	 if (board[i][j] == Blank) return Invalid;
+     	 if (board[i][j] == last || last == Blank) {
+         count++;
+         last = board[i][j];
+       }
+     	 if (board[i][j] != last || j + 1 == BOARD_COLS) {
+     		 if (last == X) xMax = count > XMax ? count : XMax;
+     		 else OMax = count > OMax ? count : OMax;
+     		 count = 0;
+     		 last == Blank;
+     	 }
+     }
+  }
+
+  // Search for streaks vertically
+  for (int i = 0; i < BOARD_COLS; i++){
+      for (int j = 0; j < BOARD_ROWS; j++){
+       if (board[i][j] == last || last == Blank) {
+         count++;
+         last = board[i][j];
+       }
+       if (board[i][j] != last || j + 1 == BOARD_ROWS) {
+         if (last == X) xMax = count > XMax ? count : XMax;
+         else OMax = count > OMax ? count : OMax;
+         count = 0;
+         last == Blank;
+       }
+     }
+  }
+
+  // If there is a tie, return Blank
+  if (OMax == XMax) return Blank;
+
+  // Otherwise return piece with largest streak value
+  Piece returnValue = OMax > XMax ? OMax : XMax;
+  return returnValue;
+
+}
