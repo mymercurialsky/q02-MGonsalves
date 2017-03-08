@@ -42,7 +42,25 @@ void Piezas::reset(){
  * Out of bounds coordinates return the Piece Invalid value
  * Trying to drop a piece where it cannot be placed loses the player's turn
 **/
-Piece Piezas::dropPiece(int column);
+Piece Piezas::dropPiece(int column){
+
+  Piece returnValue = turn;
+
+  if (column < 0 || column >= BOARD_COLS) returnValue = Invalid;
+  else if (board[BOARD_ROWS-1][column] != Blank) returnValue = Blank;
+  else{
+      for (int i = 0; i < BOARD_ROWS; i++){
+        if (board[i][column] == Blank) {
+          board[i][column] = turn;
+          break;
+        }
+      }
+  }
+
+  // Toggle turn
+  turn = (turn == X ? O : X);
+  return returnValue;
+}
 
 /**
  * Returns what piece is at the provided coordinates, or Blank if there

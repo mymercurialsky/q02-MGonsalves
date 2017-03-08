@@ -38,3 +38,47 @@ TEST(PiezasTest, constructorClearsBoard){
 	ASSERT_TRUE(clear == true);
 
 }
+
+TEST(PiezasTest, dropPieceInvalidNegativeColumn){
+  Piezas p;
+  ASSERT_TRUE(p.dropPiece(-1) == Invalid);
+}
+
+TEST(PiezasTest, dropPieceInvalidTooHighColumn){
+  Piezas p;
+  ASSERT_TRUE(p.dropPiece(BOARD_COLS) == Invalid);
+}
+
+Test(PiezasTest, dropPieceColumnFull){
+  Piezas p;
+  p.dropPiece(0);
+  p.dropPiece(0);
+  p.dropPiece(0);
+  ASSERT_TRUE(p.dropPiece(0) == Blank);
+}
+
+TEST(PiezasTest, dropPieceValid){
+  Piezas p;
+  ASSERT_TRUE(p.dropPiece(0) == X);
+}
+
+TEST(PiezasTest, dropPieceValidToggleTurn){
+  Piezas p;
+  p.dropPiece(0)
+  ASSERT_TRUE(p.dropPiece(0) == O);
+}
+
+TEST(PiezasTest, dropPieceInValidToggleTurn){
+  Piezas p;
+  p.dropPiece(10)
+  ASSERT_TRUE(p.dropPiece(0) == O);
+}
+
+Test(PiezasTest, dropPieceColumnFullToggleTurn){
+  Piezas p;
+  p.dropPiece(0);
+  p.dropPiece(0);
+  p.dropPiece(0);
+  p.dropPiece(0);
+  ASSERT_TRUE(p.dropPiece(1) == X);
+}
