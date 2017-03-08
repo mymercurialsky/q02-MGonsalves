@@ -66,7 +66,12 @@ Piece Piezas::dropPiece(int column){
  * Returns what piece is at the provided coordinates, or Blank if there
  * are no pieces there, or Invalid if the coordinates are out of bounds
 **/
-Piece Piezas::pieceAt(int row, int column);
+Piece Piezas::pieceAt(int row, int column){
+
+  if (row < 0 || row >= BOARD_ROWS || col < 0 || col >= BOARD_COLS) return Invalid;
+  return board[row][column];
+  
+}
 
 /**
  * Returns which Piece has won, if there is a winner, Invalid if the game

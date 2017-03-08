@@ -82,3 +82,54 @@ Test(PiezasTest, dropPieceColumnFullToggleTurn){
   p.dropPiece(0);
   ASSERT_TRUE(p.dropPiece(1) == X);
 }
+
+Test(PiezasTest, pieceAtBlank){
+  Piezas p;
+  ASSERT_TRUE(p.pieceAt(0,0) == Blank);
+}
+
+Test(PiezasTest, pieceAtX){
+  Piezas p;
+  p.dropPiece(0);
+  ASSERT_TRUE(p.pieceAt(0,0) == X);
+}
+
+Test(PiezasTest, pieceAtInvalidRowTooHigh){
+  Piezas p;
+  ASSERT_TRUE(p.pieceAt(BOARD_ROWS,0) == Invalid);
+}
+
+Test(PiezasTest, pieceAtInvalidColTooHigh){
+  Piezas p;
+  ASSERT_TRUE(p.pieceAt(0,BOARD_COLS) == Invalid);
+}
+
+Test(PiezasTest, pieceAtInvalidRowNegative{
+  Piezas p;
+  ASSERT_TRUE(p.pieceAt(-1,0) == Invalid);
+}
+
+Test(PiezasTest, pieceAtInvalidColNegative){
+  Piezas p;
+  ASSERT_TRUE(p.pieceAt(0,-1) == Invalid);
+}
+
+Test(PiezasTest, pieceAtInvalidBothNegative){
+  Piezas p;
+  ASSERT_TRUE(p.pieceAt(-1, -1) == Invalid);
+}
+
+Test(PiezasTest, pieceAtInvalidBothTooHigh){
+  Piezas p;
+  ASSERT_TRUE(p.pieceAt(BOARD_ROWS,BOARD_COLS) == Invalid);
+}
+
+Test(PiezasTest, pieceAtInvalidRowTooHighColNegative){
+  Piezas p;
+  ASSERT_TRUE(p.pieceAt(BOARD_ROWS, -1) == Invalid);
+}
+
+Test(PiezasTest, pieceAtInvalidRowNegativeColTooHigh){
+  Piezas p;
+  ASSERT_TRUE(p.pieceAt(-1,BOARD_COLS) == Invalid);
+}
